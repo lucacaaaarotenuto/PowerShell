@@ -1,33 +1,35 @@
 # new-item src -itemtype directory
 
-$DS=$args[0] 
+$DS=$args[0] // directory sorgente 
 
-$DD=$args[1]
+$DD=$args[1] // directory destinatario
+    
+$tipo="*.docx" // estensione passata per variabile
 
-$tipo="*.docx"
-
-
-
-new-item $DD -itemtype directory
+               //gli argomenti vengono letti e finsicono in quelle variabili
 
 
 
-$cont=0;
+new-item $DD -itemtype directory // nuovo elemento $DD specificato come directory
 
-foreach ($file in Get-ChildItem $DS) {
 
-    $cont++;
 
-    # write-host $cont;
+$cont=0; // variabile contatore inizializzata
 
-    write-host "ora copio" $file $tipo $cont"_"$file;
+foreach ($file $tipo in Get-ChildItem $DS) { // visualizza tutti i file con estensione .docx in directory sorgente
+
+    $cont++; // incremento contatore
+
+    # write-host $cont; // stampa contatore
+
+    write-host "ora copio" $file $tipo $cont"_"$file $tipo; // stampa "ora copio nome file.docx e files in nomefilenuovo.docx
 
     $srcpath="$DS\$file $tipo";
 
-    $dstpath="$DD\$cont`_$file $tipo";
+    $dstpath="$DD\$cont"_"$file $tipo"; // i file .docx presenti nell'elenco della directory sorgente verranno rinominati quando saranno copiati in DD
 
 
 
-    copy-item -path $srcpath -Destination $dstpath; 
+    copy-item -path $srcpath -Destination $dstpath; // copia dei file nell'origine nella destinazione
 
 }
