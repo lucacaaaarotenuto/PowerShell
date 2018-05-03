@@ -1,6 +1,6 @@
 # new-item src -itemtype directory
 
-$DS=$args[0]
+$DS=$args[0] 
 
 $DD=$args[1]
 
